@@ -70,20 +70,19 @@ if ($result && $result->num_rows > 0) {
 }
 
 // Fetch schools where city_id matches the selected city
-$queryLocality = "SELECT address_locality, COUNT(*) as school_count FROM schools WHERE city_id = ? GROUP BY address_locality";
+$queryLocality = "SELECT id,address,photo,name,admission_status, address_locality, COUNT(*) as school_count FROM schools WHERE city_id = ? GROUP BY address_locality";
 $stmt = $conn->prepare($queryLocality);
 $stmt->bind_param("i", $selected_city_id);
 $stmt->execute();
-$result = $stmt->get_result();
+$resultLocality = $stmt->get_result();
 
 $localities = [];
-while ($row = $result->fetch_assoc()) {
+while ($row = $resultLocality->fetch_assoc()) {
     if (!empty($row['address_locality'])) { // Ensure locality is not empty or null
         $localities[] = $row;
     }
 }
 
-$conn->close()
 ?>
 
 
@@ -666,6 +665,33 @@ $conn->close()
         }
     </style>
 
+    <!-- Compare school -->
+    <style>
+        .school-card {
+            border-radius: 10px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .school-card:hover {
+            transform: scale(1.05);
+        }
+        .admission-status {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 5px 10px;
+            background-color: #28a745;
+            color: white;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+        .admission-status.closed {
+            background-color: #dc3545;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -962,6 +988,7 @@ $conn->close()
 
     <!-- Smart Search -->
     <section>
+<<<<<<< HEAD
     <div class="container mt-5">
     <div class="custom-section-smart-search d-flex flex-wrap align-items-center">
         <div class="col-md-6 p-4">
@@ -975,14 +1002,52 @@ $conn->close()
             <a class="btn btn-primary btn-custom">
                 Get Suggestions <i class="bi bi-box-arrow-right"></i>
             </a>
+=======
+        <div class="container mt-5">
+            <div class="custom-section-smart-search d-flex flex-wrap align-items-center">
+                <div class="col-md-6 p-4">
+                    <p class="text-muted fw-semibold">
+                        <i class="fas fa-star text-danger"></i> Admission Consultant of Ezyschooling (ACE)
+                    </p>
+                    <h2 class="fw-bold">Not sure, which school to choose?</h2>
+                    <p class="text-muted">
+                        Our AI-powered assistant will help you find the right school for your child.
+                    </p>
+                    <a class="btn btn-primary btn-custom">
+                        Get Suggestions <i class="bi bi-box-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="col-md-6 text-center" style="position: relative;">
+                    <img src="../admin/uploads/homepage_images/mac-phone.webp" style="max-width: 270px;" alt="School Selection Assistant">
+                    <img src="../admin/uploads/homepage_images/search2.webp" class="animated-image" style="max-width: 50px;" alt="School Selection Assistant">
+                </div>
+            </div>
+>>>>>>> 317c2fab454775085f78561e4c9387ea87bf2890
         </div>
-        <div class="col-md-6 text-center" style="position: relative;">
-            <img src="../admin/uploads/homepage_images/mac-phone.webp" style="max-width: 270px;" alt="School Selection Assistant">
-            <img src="../admin/uploads/homepage_images/search2.webp" class="animated-image" style="max-width: 50px;" alt="School Selection Assistant">
-        </div>
-    </div>
-</div>
+    </section>
 
+    <!-- Compare School -->
+    <section>
+    <div class="container mt-5">
+    <h2 class="text-center mb-4">Top Schools</h2>
+    <div class="row g-4">
+        <?php while ($locality = $resultLocality->fetch_assoc()) { ?>
+            <div class="col-md-4">
+                <div class="school-card p-3 position-relative">
+                    <?php if ($locality['admission_status'] == 'Open') { ?>
+                        <span class="admission-status">Admission Open</span>
+                    <?php } else { ?>
+                        <span class="admission-status closed">Admission Closed</span>
+                    <?php } ?>
+                    <img src="uploads/<?php echo $locality['photo']; ?>" alt="<?php echo $locality['name']; ?>" class="img-fluid mb-2">
+                    <h5><?php echo $locality['name']; ?></h5>
+                    <p class="text-muted"><i class="bi bi-geo-alt"></i> <?php echo $locality['address_locality']; ?>, <?php echo $locality['address']; ?></p>
+                    <a href="school-details.php?id=<?php echo $locality['id']; ?>" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+</div>        
     </section>
 
     <!-- apply easily section -->

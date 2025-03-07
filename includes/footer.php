@@ -1,6 +1,19 @@
-<!-- Footer.php -->
+<!-- Footer CSS -->
+<style>
+.footer-content ul {
+    list-style: none;
+}
+.footer-content a {
+    color:white;
+    text-decoration: none;
+}
+.footer-content a:hover {
+    text-decoration: underline;
+}
+</style>
 
-<div class="container-fluid bg-dark text-light py-3"
+<!-- Footer -->
+<div class="container-fluid bg-dark text-light py-3 footer-content"
     style="clear:both;background-color: #181828; color: white;">
     <div class="row">
         <div class="col-md-3">
@@ -34,10 +47,11 @@
         <div class="col-md-3">
             <h5>About</h5>
             <ul>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Refund Policy</a></li>
-                <li><a href="#">Terms of Use</a></li>
+                <li><a href="../pages/about-us.php">About Us</a></li>
+                <li><a href="../pages/privacy-policy.php">Privacy Policy</a></li>
+                <li><a href="../pages/refund-policy.php">Refund Policy</a></li>
+                <li><a href="../pages/term-of-service.php">Terms of Use</a></li>
+                <li><a href="../pages/faqs.php" title="Frequenty asked question">FAQ</a></li>
                 <li><a href="#">Contact Us</a></li>
             </ul>
             <div class="social-icons">
