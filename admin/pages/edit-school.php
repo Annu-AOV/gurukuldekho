@@ -33,11 +33,19 @@ $school = mysqli_fetch_assoc($result);
                 <label for="name" class="form-label">School Name</label>
                 <input type="text" class="form-control" id="name" name="name" value="<?php echo $school['name']; ?>" required>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-3 mb-3">
                 <label for="admission_status" class="form-label">Admission Status</label>
                 <select class="form-select" id="admission_status" name="admission_status" required>
                     <option value="Open" <?php echo ($school['admission_status'] == 'Open') ? 'selected' : ''; ?>>Open</option>
                     <option value="Close" <?php echo ($school['admission_status'] == 'Close') ? 'selected' : ''; ?>>Close</option>
+                </select>
+            </div> 
+            <div class="col-md-3 mb-3">
+                <label for="school_type" class="form-label">School Type</label>
+                <select class="form-select" id="school_type" name="school_type" required>
+                    <option value="Boarding" <?php echo ($school['school_type'] == 'Boarding') ? 'selected' : ''; ?>>Boarding School</option>
+                    <option value="Day" <?php echo ($school['school_type'] == 'Day') ? 'selected' : ''; ?>>Day School</option>
+                    <option value="Online" <?php echo ($school['school_type'] == 'Online') ? 'selected' : ''; ?>>Online School</option>
                 </select>
             </div> 
         </div>
@@ -112,6 +120,7 @@ $school = mysqli_fetch_assoc($result);
         $affiliate = mysqli_real_escape_string($conn, $_POST['affiliate']);
         $address_locality =  mysqli_real_escape_string($conn, $_POST['locality']);
         $estd = mysqli_real_escape_string($conn, $_POST['estd']);
+        $school_type = mysqli_real_escape_string($conn, $_POST['school_type']);
         $school_mail = mysqli_real_escape_string($conn, $_POST['school_mail']);
         $primary_mob = mysqli_real_escape_string($conn, $_POST['primary_mob']);
         $secondary_mob = mysqli_real_escape_string($conn, $_POST['secondary_mob']);
@@ -123,6 +132,7 @@ $school = mysqli_fetch_assoc($result);
         SET name='$name', 
             admission_status='$admission_status', 
             address='$address', 
+            school_type='$school_type',
             affiliate='$affiliate', 
             class_maximum='$class_maximum', 
             address_locality = '$address_locality',
