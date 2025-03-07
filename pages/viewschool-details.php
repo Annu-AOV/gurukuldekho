@@ -625,8 +625,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         });
     </script>
 
-
-
 </body>
 <?php include('../includes/footer.php'); ?>
 
