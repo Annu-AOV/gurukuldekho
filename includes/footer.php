@@ -1,6 +1,19 @@
-<!-- Footer.php -->
+<!-- Footer CSS -->
+<style>
+.footer-content ul {
+    list-style: none;
+}
+.footer-content a {
+    color:white;
+    text-decoration: none;
+}
+.footer-content a:hover {
+    text-decoration: underline;
+}
+</style>
 
-<div class="container-fluid bg-dark text-light py-3"
+<!-- Footer -->
+<div class="container-fluid bg-dark text-light py-3 footer-content"
     style="clear:both;background-color: #181828; color: white;">
     <div class="row">
         <div class="col-md-3">
