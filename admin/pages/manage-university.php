@@ -1,0 +1,103 @@
+<?php
+include('../includes/header.php');
+include('../includes/sidebar.php');
+include('../includes/db_connect.php'); // Database connection
+?>
+
+<div class="container mt-4">
+    <h2 class="mb-4" style="margin-top:80px;">Manage University</h2>
+
+    <!-- Search Bar -->
+    <form method="GET" action="" class="mb-3">
+        <div class="input-group">
+            <input type="text" class="form-control" name="search" placeholder="Search by University Name"
+                value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    <!-- Table -->
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Serial No.</th>
+                <th>University Name</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Pagination Variables
+            $limit = 10; // Number of records per page
+            $page = isset($_GET['page']) ? $_GET['page'] : 1; // Current page number
+            $offset = ($page - 1) * $limit; // Offset for query
+            
+            // Search Functionality
+            $search = isset($_GET['search']) ? $_GET['search'] : '';
+            $whereClause = $search ? "WHERE name LIKE '%$search%'" : '';
+
+            // Fetch total records count
+            $countQuery = "SELECT COUNT(*) as total FROM universities $whereClause";
+            $countResult = mysqli_query($conn, $countQuery);
+            $totalRecords = mysqli_fetch_assoc($countResult)['total'];
+            $totalPages = ceil($totalRecords / $limit);
+
+            // Fetch data with pagination
+            $query = "SELECT * FROM universities $whereClause LIMIT $limit OFFSET $offset";
+            $result = mysqli_query($conn, $query);
+
+            if (mysqli_num_rows($result) > 0) {
+                $serial = $offset + 1;
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<tr>";
+                    echo "<td>" . $serial++ . "</td>";
+                    echo "<td>" . $row['university_name'] . "</td>";
+                    echo "<td>" . $row['address'] . "</td>";
+                    echo "<td>
+                          <a href='../pages/edit-university.php?id=" . $row['id'] . "' class='btn btn-sm btn-warning'>Edit</a>
+                            <a href='../pages/delete-university.php?id=" . $row['id'] . "' class='btn btn-sm btn-danger' onclick='return confirm(\"Are you sure you want to delete this university?\")'>Delete</a>
+                          </td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='4' class='text-center'>No records found</td></tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+    <?php
+    if (isset($_GET['message'])) {
+        if ($_GET['message'] == 'success') {
+            echo "<p class='alert alert-success'>university deleted successfully!</p>";
+        } elseif ($_GET['message'] == 'error') {
+            echo "<p class='alert alert-danger'>Failed to delete the university. Please try again.</p>";
+        }
+    }
+    ?>
+
+    <!-- Pagination -->
+    <nav>
+        <ul class="pagination justify-content-center">
+            <?php if ($page > 1): ?>
+                <li class="page-item">
+                    <a class="page-link" href="?page=<?php echo $page - 1; ?>&search=<?php echo $search; ?>">Previous</a>
+                </li>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
+                    <a class="page-link" href="?page=<?php echo $i; ?>&search=<?php echo $search; ?>"><?php echo $i; ?></a>
+                </li>
+            <?php endfor; ?>
+
+            <?php if ($page < $totalPages): ?>
+                <li class="page-item">
+                    <a class="page-link" href="?page=<?php echo $page + 1; ?>&search=<?php echo $search; ?>">Next</a>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+</div>
+
+<?php include('../includes/footer.php'); ?>
