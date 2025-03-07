@@ -624,6 +624,48 @@ $conn->close()
         }
     </style>
 
+    <!-- Smart search -->
+    <style>
+        .custom-section-smart-search {
+            background-color: #e3f2fd; /* Light blue background */
+            border-radius: 15px;
+            padding: 30px;
+        }
+        .btn-custom {
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        .btn-custom i {
+            margin-left: 8px;
+        }
+        .animated-image {
+            position: absolute; /* Position relative to the parent container */
+            top: 0;
+            left:150px;
+            animation: moveImage 5s ease-in-out infinite;
+        }
+
+        @keyframes moveImage {
+            0% {
+                transform: translate(10%, 60%); /* Start at the original position */
+            }
+            25% {
+                transform: translate(80%, 100%); /* Move horizontally */
+            }
+            50% {
+                transform: translate(370%, 50%); /* Move diagonally */
+            }
+            75% {
+                transform: translate(330%, 125%); /* Move vertically */
+            }
+            100% {
+                transform: translate(10%, 60%); /* Return to the original position */
+            }
+        }
+    </style>
+
 </head>
 
 <body>
@@ -917,6 +959,31 @@ $conn->close()
         </div>
     </section>
     <?php } ?>
+
+    <!-- Smart Search -->
+    <section>
+    <div class="container mt-5">
+    <div class="custom-section-smart-search d-flex flex-wrap align-items-center">
+        <div class="col-md-6 p-4">
+            <p class="text-muted fw-semibold">
+                <i class="fas fa-star text-danger"></i> Admission Consultant of Ezyschooling (ACE)
+            </p>
+            <h2 class="fw-bold">Not sure, which school to choose?</h2>
+            <p class="text-muted">
+                Our AI-powered assistant will help you find the right school for your child.
+            </p>
+            <a class="btn btn-primary btn-custom">
+                Get Suggestions <i class="bi bi-box-arrow-right"></i>
+            </a>
+        </div>
+        <div class="col-md-6 text-center" style="position: relative;">
+            <img src="../admin/uploads/homepage_images/mac-phone.webp" style="max-width: 270px;" alt="School Selection Assistant">
+            <img src="../admin/uploads/homepage_images/search2.webp" class="animated-image" style="max-width: 50px;" alt="School Selection Assistant">
+        </div>
+    </div>
+</div>
+
+    </section>
 
     <!-- apply easily section -->
     <section class="my-5">
