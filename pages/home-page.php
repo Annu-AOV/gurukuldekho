@@ -988,26 +988,11 @@ while ($row = $resultLocality->fetch_assoc()) {
 
     <!-- Smart Search -->
     <section>
-<<<<<<< HEAD
-    <div class="container mt-5">
-    <div class="custom-section-smart-search d-flex flex-wrap align-items-center">
-        <div class="col-md-6 p-4">
-            <p class="text-muted fw-semibold">
-                <i class="fas fa-star text-danger"></i> Admission Consultant of GurukulDekho (ACG)
-            </p>
-            <h2 class="fw-bold">Not sure, which school to choose?</h2>
-            <p class="text-muted">
-                Our AI-powered assistant will help you find the right school for your child.
-            </p>
-            <a class="btn btn-primary btn-custom">
-                Get Suggestions <i class="bi bi-box-arrow-right"></i>
-            </a>
-=======
         <div class="container mt-5">
             <div class="custom-section-smart-search d-flex flex-wrap align-items-center">
                 <div class="col-md-6 p-4">
                     <p class="text-muted fw-semibold">
-                        <i class="fas fa-star text-danger"></i> Admission Consultant of Ezyschooling (ACE)
+                        <i class="fas fa-star text-danger"></i> Admission Consultant of GurukulDekho (ACG)
                     </p>
                     <h2 class="fw-bold">Not sure, which school to choose?</h2>
                     <p class="text-muted">
@@ -1022,7 +1007,6 @@ while ($row = $resultLocality->fetch_assoc()) {
                     <img src="../admin/uploads/homepage_images/search2.webp" class="animated-image" style="max-width: 50px;" alt="School Selection Assistant">
                 </div>
             </div>
->>>>>>> 317c2fab454775085f78561e4c9387ea87bf2890
         </div>
     </section>
 
