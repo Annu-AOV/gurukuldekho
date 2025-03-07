@@ -69,8 +69,21 @@ if ($result && $result->num_rows > 0) {
     $universities = $result->fetch_all(MYSQLI_ASSOC);
 }
 
-// Close connection
-$conn->close();
+// Fetch schools where city_id matches the selected city
+$queryLocality = "SELECT address_locality, COUNT(*) as school_count FROM schools WHERE city_id = ? GROUP BY address_locality";
+$stmt = $conn->prepare($queryLocality);
+$stmt->bind_param("i", $selected_city_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$localities = [];
+while ($row = $result->fetch_assoc()) {
+    if (!empty($row['address_locality'])) { // Ensure locality is not empty or null
+        $localities[] = $row;
+    }
+}
+
+$conn->close()
 ?>
 
 
@@ -598,6 +611,19 @@ $conn->close();
         }
     </style>
 
+    <!-- Popular localities -->
+    <style>
+         .locality-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s ease-in-out;
+        }
+        .locality-card:hover {
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -862,6 +888,35 @@ $conn->close();
             </div>
         </div>
     </section>
+
+    <!-- Popular localities -->
+    <?php if (!empty($localities)) { ?>
+    <section>
+        <div class="container text-center mt-5">
+            <h3>Popular Localities in <span class="text-primary"><?php echo ucfirst($schools[0]['city_name']) ?></span></h3>
+            <p class="text-muted">Check schools in top Localities</p>
+            <div class="row g-3 mt-3">
+            <?php foreach ($localities as $locality): ?>
+                <div class="col-md-4 col-sm-6">
+                    <div class="locality-card p-3">
+                        <a href="./explore-school.php?locality=<?php echo $locality['address_locality'] ?>" style="text-decoration: none; color: black;">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5><strong><?php echo $locality['address_locality']; ?></strong></h5>
+                                    <p class="text-muted mb-0"><?php echo $locality['school_count']; ?> Schools</p>
+                                </div>    
+                                <div>
+                                    <i class="bi bi-chevron-right"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+    <?php } ?>
 
     <!-- apply easily section -->
     <section class="my-5">

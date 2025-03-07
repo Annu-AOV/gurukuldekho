@@ -72,6 +72,11 @@ include('../includes/db_connect.php'); // Include database connection
                 </select>
             </div>
 
+            <div>
+                <label for="locality_address" class="form-label">Locality</label>
+                <input type="text" class="form-control" id="locality_address" name="locality_address" required>
+            </div>
+
             <div class="col-md-6 col-12 mb-3">
                 <label for="school_mail" class="form-label">School Email</label>
                 <input type="email" class="form-control" id="school_mail" name="school_mail" required>
@@ -121,6 +126,7 @@ include('../includes/db_connect.php'); // Include database connection
         $class_maximum = $_POST['class_maximum'];
         $estd = $_POST['estd'] ? intval($_POST['estd']) : NULL;
         $school_mail = $_POST['school_mail'];
+        $address_locality = $_POST['locality_address'];
         $primary_mob = $_POST['primary_mob'];
         $secondary_mob = $_POST['secondary_mob'] ? $_POST['secondary_mob'] : NULL;
         $description = mysqli_real_escape_string($conn, $_POST['description']);
@@ -140,8 +146,8 @@ include('../includes/db_connect.php'); // Include database connection
             $photo_path = $target_file;
 
             // Insert data into the database
-            $sql = "INSERT INTO schools (name, admission_status, address, city_id, affiliate, class_minimum, class_maximum, estd, school_mail, primary_mob, secondary_mob, description, photo, map_embed_code) 
-                    VALUES ('$name', '$admission_status', '$address', '$city_id', '$affiliate', '$class_minimum', '$class_maximum', $estd, '$school_mail', '$primary_mob', '$secondary_mob', '$description', '$photo_path', '$map_embed_code')";
+            $sql = "INSERT INTO schools (name, address_locality, admission_status, address, city_id, affiliate, class_minimum, class_maximum, estd, school_mail, primary_mob, secondary_mob, description, photo, map_embed_code) 
+                    VALUES ('$name', '$address_locality', '$admission_status', '$address', '$city_id', '$affiliate', '$class_minimum', '$class_maximum', $estd, '$school_mail', '$primary_mob', '$secondary_mob', '$description', '$photo_path', '$map_embed_code')";
 
             if (mysqli_query($conn, $sql)) {
                 echo "<p class='alert alert-success mt-4'>School added successfully!</p>";

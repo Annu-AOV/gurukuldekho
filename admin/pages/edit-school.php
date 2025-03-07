@@ -47,9 +47,13 @@ $school = mysqli_fetch_assoc($result);
                 <label for="address" class="form-label">Address</label>
                 <input type="text" class="form-control" id="address" name="address" value="<?php echo $school['address']; ?>" required>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-3 mb-3">
                 <label for="affiliate" class="form-label">Affiliate</label>
                 <input type="text" class="form-control" id="affiliate" name="affiliate" value="<?php echo $school['affiliate']; ?>">
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="locality" class="form-label">Locality</label>
+                <input type="text" class="form-control" id="locality" name="locality" value="<?php echo $school['address_locality']; ?>">
             </div>
         </div>
 
@@ -106,6 +110,7 @@ $school = mysqli_fetch_assoc($result);
         $class_maximum = mysqli_real_escape_string($conn, $_POST['class_maximum']);
         $class_minimum = mysqli_real_escape_string($conn, $_POST['class_minimum']);
         $affiliate = mysqli_real_escape_string($conn, $_POST['affiliate']);
+        $address_locality =  mysqli_real_escape_string($conn, $_POST['locality']);
         $estd = mysqli_real_escape_string($conn, $_POST['estd']);
         $school_mail = mysqli_real_escape_string($conn, $_POST['school_mail']);
         $primary_mob = mysqli_real_escape_string($conn, $_POST['primary_mob']);
@@ -120,6 +125,7 @@ $school = mysqli_fetch_assoc($result);
             address='$address', 
             affiliate='$affiliate', 
             class_maximum='$class_maximum', 
+            address_locality = '$address_locality',
             class_minimum='$class_minimum',
             estd='$estd', 
             school_mail='$school_mail', 
