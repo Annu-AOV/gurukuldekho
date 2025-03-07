@@ -1,3 +1,4 @@
+<?php include '../includes/header2.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,8 +77,6 @@
 </head>
 
 <body>
-
-    <?php include '../includes/header2.php'; ?>
 
     <div class="faq-header">
         <h2>FAQs</h2>
