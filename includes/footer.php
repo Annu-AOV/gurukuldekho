@@ -34,10 +34,11 @@
         <div class="col-md-3">
             <h5>About</h5>
             <ul>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Refund Policy</a></li>
-                <li><a href="#">Terms of Use</a></li>
+                <li><a href="../pages/about-us.php">About Us</a></li>
+                <li><a href="../pages/privacy-policy.php">Privacy Policy</a></li>
+                <li><a href="../pages/refund-policy.php">Refund Policy</a></li>
+                <li><a href="../pages/term-of-service.php">Terms of Use</a></li>
+                <li><a href="../pages/faqs.php" title="Frequenty asked question">FAQ</a></li>
                 <li><a href="#">Contact Us</a></li>
             </ul>
             <div class="social-icons">
