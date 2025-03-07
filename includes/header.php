@@ -384,7 +384,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <!-- Logo and City Search -->
             <div class="col-md-3 col-3 d-flex align-items-center">
                 <img src="../admin/uploads/school_photos/logo.jpg" alt="Logo" class="me-2"
-                    style="width: 50px; height: 50px;"><h4 style="color: red;">GurukulDekho</h4>
+                    style="width: 50px; height: 50px;">
                 <select class="form-select" id="citySelect" onchange="setCityCookie()">
                     <option value="">Select City</option>
                     <?php
