@@ -69,8 +69,21 @@ if ($result && $result->num_rows > 0) {
     $universities = $result->fetch_all(MYSQLI_ASSOC);
 }
 
-// Close connection
-$conn->close();
+// Fetch schools where city_id matches the selected city
+$queryLocality = "SELECT address_locality, COUNT(*) as school_count FROM schools WHERE city_id = ? GROUP BY address_locality";
+$stmt = $conn->prepare($queryLocality);
+$stmt->bind_param("i", $selected_city_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$localities = [];
+while ($row = $result->fetch_assoc()) {
+    if (!empty($row['address_locality'])) { // Ensure locality is not empty or null
+        $localities[] = $row;
+    }
+}
+
+$conn->close()
 ?>
 
 
@@ -598,6 +611,61 @@ $conn->close();
         }
     </style>
 
+    <!-- Popular localities -->
+    <style>
+         .locality-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s ease-in-out;
+        }
+        .locality-card:hover {
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        }
+    </style>
+
+    <!-- Smart search -->
+    <style>
+        .custom-section-smart-search {
+            background-color: #e3f2fd; /* Light blue background */
+            border-radius: 15px;
+            padding: 30px;
+        }
+        .btn-custom {
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        .btn-custom i {
+            margin-left: 8px;
+        }
+        .animated-image {
+            position: absolute; /* Position relative to the parent container */
+            top: 0;
+            left:150px;
+            animation: moveImage 5s ease-in-out infinite;
+        }
+
+        @keyframes moveImage {
+            0% {
+                transform: translate(10%, 60%); /* Start at the original position */
+            }
+            25% {
+                transform: translate(80%, 100%); /* Move horizontally */
+            }
+            50% {
+                transform: translate(370%, 50%); /* Move diagonally */
+            }
+            75% {
+                transform: translate(330%, 125%); /* Move vertically */
+            }
+            100% {
+                transform: translate(10%, 60%); /* Return to the original position */
+            }
+        }
+    </style>
+
 </head>
 
 <body>
@@ -861,6 +929,60 @@ $conn->close();
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Popular localities -->
+    <?php if (!empty($localities)) { ?>
+    <section>
+        <div class="container text-center mt-5">
+            <h3>Popular Localities in <span class="text-primary"><?php echo ucfirst($schools[0]['city_name']) ?></span></h3>
+            <p class="text-muted">Check schools in top Localities</p>
+            <div class="row g-3 mt-3">
+            <?php foreach ($localities as $locality): ?>
+                <div class="col-md-4 col-sm-6">
+                    <div class="locality-card p-3">
+                        <a href="./explore-school.php?locality=<?php echo $locality['address_locality'] ?>" style="text-decoration: none; color: black;">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5><strong><?php echo $locality['address_locality']; ?></strong></h5>
+                                    <p class="text-muted mb-0"><?php echo $locality['school_count']; ?> Schools</p>
+                                </div>    
+                                <div>
+                                    <i class="bi bi-chevron-right"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+    <?php } ?>
+
+    <!-- Smart Search -->
+    <section>
+    <div class="container mt-5">
+    <div class="custom-section-smart-search d-flex flex-wrap align-items-center">
+        <div class="col-md-6 p-4">
+            <p class="text-muted fw-semibold">
+                <i class="fas fa-star text-danger"></i> Admission Consultant of Ezyschooling (ACE)
+            </p>
+            <h2 class="fw-bold">Not sure, which school to choose?</h2>
+            <p class="text-muted">
+                Our AI-powered assistant will help you find the right school for your child.
+            </p>
+            <a class="btn btn-primary btn-custom">
+                Get Suggestions <i class="bi bi-box-arrow-right"></i>
+            </a>
+        </div>
+        <div class="col-md-6 text-center" style="position: relative;">
+            <img src="../admin/uploads/homepage_images/mac-phone.webp" style="max-width: 270px;" alt="School Selection Assistant">
+            <img src="../admin/uploads/homepage_images/search2.webp" class="animated-image" style="max-width: 50px;" alt="School Selection Assistant">
+        </div>
+    </div>
+</div>
+
     </section>
 
     <!-- apply easily section -->
