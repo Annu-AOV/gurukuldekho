@@ -1,0 +1,176 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body {
+    display: flex;
+    min-height: 100vh;
+    background: #f4f4f4;
+    transition: 0.3s;
+    flex-direction: column;
+}
+
+.fas{
+    padding-right: 10px;
+}
+/* Sidebar styles */
+#sidebar-wrapper {
+    width:200px; 
+    height: 250vh;
+    /* position: fixed; */
+    position: relative;
+    /* Changed to relative so it's not fixed */
+    top: 0;
+    /* top: auto; */
+    /* Sidebar will start below the navbar (56px is the height of the navbar) */
+    left: 0;
+    z-index: 1020;
+    transition: all 0.3s;
+    background-color: #343a40;
+    margin-left: -250px;
+    /* Hidden by default */
+    margin-top: 20px;
+    /* Add some space from the footer */
+    overflow-y: auto;
+
+}
+
+/* Sidebar Toggle for Mobile View */
+#sidebar-wrapper {
+    width: 200px;
+    transition: all 0.3s;
+}
+
+#sidebar-wrapper.toggled {
+    margin-left: 0;
+    /* Visible when toggled */
+}
+
+.list-group-item:hover {
+    background-color: #2291ff;
+}
+
+.sidebar-heading {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.list-group-item {
+border:none;
+color: #95c0ff;
+box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.collapse{
+    padding-left: 20px;
+}
+Adjust content wrapper when sidebar is visible #page-content-wrapper {
+    margin-left: 250px;
+    /* Space for the sidebar */
+    transition: all 0.3s;
+    /* Smooth transition */
+}
+
+
+@media (min-width: 992px) {
+
+    /* Sidebar always visible in desktop view */
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    /* Hide toggle button on large screens */
+    #menu-toggle {
+        display: none;
+    }
+}
+
+@media (max-width: 991px) {
+
+    /* Default position of sidebar in mobile view */
+    #sidebar-wrapper {
+        margin-left: -250px;
+    }
+
+    /* Sidebar visible when toggled */
+    #sidebar-wrapper.toggled {
+        margin-left: 0;
+    }
+}
+
+.navbar-brand img {
+    border-radius: 50%;
+    /* Makes the logo circular, optional */
+}
+
+/* Ensure the navbar stays above the sidebar */
+.navbar {
+    z-index: 1030;
+    /* Higher z-index for the navbar */
+}
+
+.btn-outline-light i {
+    font-size: 1.5rem;
+    /* Adjust icon size */
+}
+
+
+/* Ensure the footer stays at the bottom */
+html,
+body {
+    height: 100%;
+    /* Full height for the page */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    /* margin-top: auto; */
+    /* Push the footer to the bottom */
+    /* background-color: #343a40;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0; */
+    /* Default padding for desktop */
+
+   
+        /* background: #2a2f3b;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        width: 100%; */
+
+        position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+    
+}
+
+/* Mobile View - Adjust footer padding and text size */
+@media (max-width: 768px) {
+    footer {
+        padding: 10px 0;
+        /* Reduce padding for mobile view */
+        font-size: 14px;
+        /* Adjust font size for smaller screens */
+    }
+}
+
+/* Optional: Additional styling for small screens */
+@media (max-width: 576px) {
+    footer {
+        font-size: 12px;
+        /* Even smaller font size for extra-small screens */
+    }
+}
