@@ -1,38 +1,104 @@
 <!-- Footer CSS -->
 <style>
-.footer-content ul {
-    list-style: none;
-}
-.footer-content a {
-    color:white;
-    text-decoration: none;
-}
-.footer-content a:hover {
-    text-decoration: underline;
-}
+    .footer-content ul {
+        list-style: none;
+    }
+
+    .footer-content a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .footer-content a:hover {
+        text-decoration: underline;
+    }
 </style>
+
+<!-- PHP -->
+<?php
+// Fetch states from the database
+$sql = "
+    SELECT DISTINCT c.state 
+    FROM schools s
+    JOIN city c ON s.city_id = c.id
+    WHERE s.school_type = 'Boarding'
+";
+$resultBoardingState = $conn->query($sql);
+
+// Fetch city from the database
+$sql = "
+    SELECT DISTINCT c.city_name 
+    FROM schools s
+    JOIN city c ON s.city_id = c.id
+    WHERE s.school_type = 'Boarding'
+";
+$resultBoardingCity = $conn->query($sql);
+
+// Fetch city from the database
+$sql = "SELECT DISTINCT city_name FROM city";
+$resultCity = $conn->query($sql);
+?>
 
 <!-- Footer -->
 <div class="container-fluid bg-dark text-light py-3 footer-content"
     style="clear:both;background-color: #181828; color: white;">
     <div class="row">
         <div class="col-md-3">
-            <h5>Boarding Schools in States</h5>
-            <ul>
-                <li><a href="#">Boarding Schools in Himachal Pradesh</a></li>
-                <li><a href="#">Boarding Schools in Uttarakhand</a></li>
-                <li><a href="#">Boarding Schools in Karnataka</a></li>
-                <li><a href="#">Boarding Schools in Maharashtra</a></li>
-                <li><a href="#">Boarding Schools in Punjab</a></li>
-            </ul>
+            <div>
+                <h5>Boarding Schools in States</h5>
+                <ul>
+                    <?php
+                    if ($resultBoardingState->num_rows > 0) {
+                        while ($row = $resultBoardingState->fetch_assoc()) {
+                            echo "<li><a href='../pages/explore-school.php?state=" . urlencode($row['state']) . "'>Boarding Schools in " . htmlspecialchars($row['state']) . "</a></li>";
+                        }
+                    } else {
+                        echo "<li>No states found</li>";
+                    }
+                    ?>
+                </ul>
+            </div>
+            <div>
+                <h5>Popular Boarding Search</h5>
+                <ul>
+                    <?php
+                    if ($resultBoardingState->num_rows > 0) {
+                        while ($row = $resultBoardingState->fetch_assoc()) {
+                            echo "<li><a href='../pages/explore-school.php?state=" . urlencode($row['state']) . "'>Boarding Schools in " . htmlspecialchars($row['state']) . "</a></li>";
+                        }
+                    } else {
+                        echo "<li>No states found</li>";
+                    }
+                    ?>
+                </ul>
+            </div>
         </div>
         <div class="col-md-3">
             <h5>Boarding Schools in Cities</h5>
             <ul>
-                <li><a href="#">Boarding Schools in Dehradun</a></li>
-                <li><a href="#">Boarding Schools in Kolkata</a></li>
-                <li><a href="#">Boarding Schools in Bangalore</a></li>
-                <li><a href="#">Boarding Schools in Shimla</a></li>
+                <?php
+                if ($resultBoardingCity->num_rows > 0) {
+                    while ($row = $resultBoardingCity->fetch_assoc()) {
+                        echo "<li><a href='../pages/explore-school.php?city=" . urlencode($row['city_name']) . "'>Boarding Schools in " . htmlspecialchars($row['city_name']) . "</a></li>";
+                    }
+                } else {
+                    echo "<li>No states found</li>";
+                }
+                ?>
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <h5>Schools</h5>
+            <ul>
+                <?php
+                if ($resultCity->num_rows > 0) {
+                    while ($row = $resultCity->fetch_assoc()) {
+                        echo "<li><a href='../pages/explore-school.php?city=" . urlencode($row['city_name']) . "'>Boarding Schools in " . htmlspecialchars($row['city_name']) . "</a></li>";
+                    }
+                } else {
+                    echo "<li>No states found</li>";
+                }
+                ?>
             </ul>
         </div>
         <div class="col-md-3">
