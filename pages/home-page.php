@@ -992,7 +992,7 @@ while ($row = $resultLocality->fetch_assoc()) {
             <div class="custom-section-smart-search d-flex flex-wrap align-items-center">
                 <div class="col-md-6 p-4">
                     <p class="text-muted fw-semibold">
-                        <i class="fas fa-star text-danger"></i> Admission Consultant of Ezyschooling (ACE)
+                        <i class="fas fa-star text-danger"></i> Admission Consultant of GurukulDekho (ACG)
                     </p>
                     <h2 class="fw-bold">Not sure, which school to choose?</h2>
                     <p class="text-muted">
@@ -1078,7 +1078,7 @@ while ($row = $resultLocality->fetch_assoc()) {
             <!-- Left Side: Video Section -->
             <div class="col-md-5 text-center">
                 <iframe width="90%" height="250" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0"
-                    allowfullscreen></iframe>
+                    allowfullscreen style="border-radius: 25px;box-shadow: 10px 10px 20px rgba(255, 184, 201, .18);"></iframe>
             </div>
 
             <!-- Right Side: Steps Section -->
