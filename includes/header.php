@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../admin/includes/db_connect.php';
+include 'admin/includes/db_connect.php';
 
 $api_key = "Aqy3EgvTuuvAFAQzAYsS5kNFbzcd8Qv0NLWZfwXOKXkiMLQbX4DfrJM8jJcv";
 
@@ -361,12 +361,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <?php
-    // Database connection
-    $conn = new mysqli("localhost", "root", "", "gurukuldekho");
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
 
     // Fetch city data
     $cityQuery = "SELECT id, city_name FROM city";
