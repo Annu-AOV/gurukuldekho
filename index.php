@@ -767,7 +767,7 @@ while ($row = $resultLocality->fetch_assoc()) {
             <!-- Third Row: How to apply in schools link -->
             <div class="row justify-content-center">
                 <div class="col-md-8 text-center">
-                    <a href="#" class="how-to-apply-link">💡 How to Apply in Schools?</a>
+                    <a href="#how-to-apply" class="how-to-apply-link">💡 How to Apply in Schools?</a>
                 </div>
             </div>
         </div>
@@ -998,8 +998,8 @@ while ($row = $resultLocality->fetch_assoc()) {
                     </a>
                 </div>
                 <div class="col-md-6 text-center" style="position: relative;">
-                    <img src="../admin/uploads/homepage_images/mac-phone.webp" style="max-width: 270px;" alt="School Selection Assistant">
-                    <img src="../admin/uploads/homepage_images/search2.webp" class="animated-image" style="max-width: 50px;" alt="School Selection Assistant">
+                    <img src="./admin/uploads/homepage_images/mac-phone.webp" style="max-width: 270px;" alt="School Selection Assistant">
+                    <img src="./admin/uploads/homepage_images/search2.webp" class="animated-image" style="max-width: 50px;" alt="School Selection Assistant">
                 </div>
             </div>
         </div>
@@ -1046,12 +1046,12 @@ while ($row = $resultLocality->fetch_assoc()) {
                                 Application Tracking system.</li>
                             <li><i class="bi bi-file-earmark"></i> No Need to visit schools physically.</li>
                         </ul>
-                        <a href="explore_school.php" class="apply-btn">Start Your Application Now →</a>
+                        <a href="./pages/explore-school.php" class="apply-btn">Start Your Application Now →</a>
                     </div>
 
                     <!-- Right Image Section -->
                     <div class="apply-image">
-                        <img src="../admin/uploads/homepage_images/img1.png" alt="Apply Easily">
+                        <img src="./admin/uploads/homepage_images/img1.png" alt="Apply Easily">
                     </div>
                 </div>
             </div>
@@ -1060,7 +1060,7 @@ while ($row = $resultLocality->fetch_assoc()) {
 
 
     <!-- how to apply gurukuldekho steps section -->
-    <div class="container mt-4">
+    <div class="container mt-4" id="how-to-apply">
         <div class="apply-gurukul-section row align-items-center p-4">
             <div class="text-center w-100">
                 <h3>How to apply with <span style="color: red;">GurukulDekho</span>?</h3>
@@ -1080,18 +1080,18 @@ while ($row = $resultLocality->fetch_assoc()) {
                 <div class="row g-4 justify-content-center">
                     <?php
                     $steps = [
-                        ["REGISTER YOURSELF", "user-dashboard.php", "View Account", "btn-primary", "step-1.f573b7d.webp"],
-                        ["CREATE YOUR CHILD'S PROFILE", "manage-child.php", "Create Profile", "btn-primary", "step-2.b1bf1bf.webp"],
-                        ["ADD SCHOOLS TO CART", "explore-school.php", "Add to Apply", "btn-primary", "step-3.37e4f80.webp"],
-                        ["FILL COMMON APPLICATION FORM", "explore-school.php", "Add to Apply", "btn-primary", "step-4.45ec358.webp"],
-                        ["TRACK APPLICATIONS", "explore-school.php", "Track Now", "btn-primary", "step-5.0447484.webp"]
+                        ["REGISTER YOURSELF", "./pages/user-dashboard.php", "View Account", "btn-primary", "step-1.f573b7d.webp"],
+                        ["CREATE YOUR CHILD'S PROFILE", "./pages/manage-child.php", "Create Profile", "btn-primary", "step-2.b1bf1bf.webp"],
+                        ["ADD SCHOOLS TO CART", "./pages/explore-school.php", "Add to Apply", "btn-primary", "step-3.37e4f80.webp"],
+                        ["FILL COMMON APPLICATION FORM", "./pages/explore-school.php", "Add to Apply", "btn-primary", "step-4.45ec358.webp"],
+                        ["TRACK APPLICATIONS", "./pages/explore-school.php", "Track Now", "btn-primary", "step-5.0447484.webp"]
                     ];
                     $stepNumber = 1;
                     foreach ($steps as $step) {
                         echo '<div class="col-md-4 position-relative text-center">
                             <span class="step-number">' . $stepNumber . '</span>
                             <div class="step-card">
-                                <img src="../admin/uploads/homepage_images/' . $step[4] . '" alt="Step ' . $stepNumber . '">
+                                <img src="./admin/uploads/homepage_images/' . $step[4] . '" alt="Step ' . $stepNumber . '">
                                 <p>' . $step[0] . '</p>
                                 <button class="btn ' . $step[3] . ' step-btn" data-url="' . $step[1] . '">' . $step[2] . '</button>
                             </div>
@@ -1191,14 +1191,14 @@ while ($row = $resultLocality->fetch_assoc()) {
     <script>
         function redirectToDetails(schoolId) {
             // Redirect to manage-school.php with the school ID as a query parameter
-            window.location.href = '../pages/viewschool-details.php?id=' + schoolId;
+            window.location.href = './pages/viewschool-details.php?id=' + schoolId;
         }
     </script>
 
     <script>
         function redirectToDetail(universityId) {
             // Redirect to manage-school.php with the university ID as a query parameter
-            window.location.href = '../pages/viewuniversity-detail.php?id=' + universityId;
+            window.location.href = './pages/viewuniversity-detail.php?id=' + universityId;
         }
     </script>
 
@@ -1215,7 +1215,7 @@ while ($row = $resultLocality->fetch_assoc()) {
 
             recognition.onresult = function (event) {
                 const query = event.results[0][0].transcript;
-                window.location.href = 'search-results.php?query=' + encodeURIComponent(query);
+                window.location.href = './pages/search-results.php?query=' + encodeURIComponent(query);
             };
 
             recognition.onerror = function (event) {
@@ -1282,7 +1282,7 @@ while ($row = $resultLocality->fetch_assoc()) {
                 const longitude = position.coords.longitude;
 
                 // Make AJAX call to get-nearby-schools.php
-                fetch(`../api/get-nearby-schools.php?latitude=${latitude}&longitude=${longitude}`)
+                fetch(`./api/get-nearby-schools.php?latitude=${latitude}&longitude=${longitude}`)
                     .then((response) => response.json())
                     .then((data) => {
                         if (data.status === "success") {
@@ -1290,7 +1290,7 @@ while ($row = $resultLocality->fetch_assoc()) {
                             localStorage.setItem("nearbySchools", JSON.stringify(data.schools));
 
                             // Redirect to school-nearby.php
-                            window.location.href = "../pages/school-nearby.php";
+                            window.location.href = "./pages/school-nearby.php";
                         } else {
                             alert("Error fetching nearby schools: " + data.message);
                         }
@@ -1327,7 +1327,7 @@ while ($row = $resultLocality->fetch_assoc()) {
             }
 
             let xhr = new XMLHttpRequest();
-            xhr.open("GET", "search-results.php?q=" + query, true);
+            xhr.open("GET", "./pages/search-results.php?q=" + query, true);
             xhr.onload = function () {
                 if (xhr.status === 200) {
                     document.getElementById('searchResults').innerHTML = xhr.responseText;
@@ -1383,6 +1383,6 @@ while ($row = $resultLocality->fetch_assoc()) {
 
 </body>
 
-<?php include('../includes/footer.php'); ?>
+<?php include('./includes/footer.php'); ?>
 
 </html>

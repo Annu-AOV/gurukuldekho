@@ -501,8 +501,8 @@ if (isset($_GET['redirect']) && $_GET['redirect'] == 'signin') {
     <div class="container-fluid navbar-container desktop-menu" style="height: 60px; background-color: #eaf2fc;">
         <div class="row">
             <div class="col-md-6 d-flex justify-content-start" style="margin-top:15px;">
-                <a href="#" class="nav-link" id="home-link">Home</a>
-                <a href="school-nearby.php" class="nav-link" style="padding-left: 15px;
+                <a href="../index.php" class="nav-link" id="home-link">Home</a>
+                <a href="../pages/explore-school.php" class="nav-link" style="padding-left: 15px;
                 padding-right: 15px;">Explore Schools</a>
                 <a href="#" class="nav-link">Compare Schools</a>
             </div>
@@ -682,10 +682,7 @@ if (isset($_GET['redirect']) && $_GET['redirect'] == 'signin') {
 
     <!-- redirect to home page -->
     <script>
-        document.getElementById("home-link").addEventListener("click", function (event) {
-            event.preventDefault(); // Default `#` action rokne ke liye
-            window.location.href = "../pages/home-page.php"; // Redirect to home page
-        });
+        
     </script>
 
     <!-- redirect to manage child -->
